@@ -2,7 +2,7 @@ import { Router } from "express";
 import { pullCatData, getCategory } from "../controller/category.js";
 import {
   getJokes,
-  pullJokeData,
+  pullJokesData,
   getJokeById,
   getJokeByCat,
   putJokeInteraction,
@@ -11,7 +11,7 @@ const router = Router();
 
 router.get("/pullCatData", pullCatData);
 router.get("/getCategory", getCategory);
-router.get("/pullJokeData", pullJokeData);
+router.get("/pullJokesData", pullJokesData);
 router.get("/getJokes", getJokes);
 router.get("/getJoke/:id", getJokeById);
 router.get("/getJokeByCat", getJokeByCat);

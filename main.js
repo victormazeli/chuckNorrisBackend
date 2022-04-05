@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import router from "./routes/router.js";
 import mongoose from "mongoose";
-import config from "./config.js";
+import config from "./envData.js";
+
 
 const app = express();
 async function dbConnect() {

@@ -1,7 +1,11 @@
 import JokesTable from "../Model/Jokes.js";
 import axios from "axios";
 /* import express from "express"; */
-export const pullJokeData = async (req, res) => {
+export const pullJokesData = async (req, res) => {
+  const checkJokes = await JokesTable.find();
+  if (checkJokes) {
+    await JokesTable.deleteMany();
+  }
   try {
     const catOption = {
       method: "get",
@@ -9,9 +13,9 @@ export const pullJokeData = async (req, res) => {
     };
     const pullData = await axios.request(catOption);
     const stored = pullData.data.result;
-    
+
     const jokesData = await JokesTable.insertMany(stored);
-    res.json({ message: "Data entered succesfully" });
+    res.json({ message: "Data entered succesfully", stored: stored });
   } catch (error) {
     console.error(error);
   }
@@ -81,7 +85,7 @@ export const getJokeByCat = async (req, res) => {
     } else {
       const getJokeByCat = await JokesTable.paginate(
         {
-          categories: [categories],
+          categories: { $all: [categories] },
         },
         jokeOption
       );
